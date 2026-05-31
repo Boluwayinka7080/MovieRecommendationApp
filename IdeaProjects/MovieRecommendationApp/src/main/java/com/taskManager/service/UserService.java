@@ -22,4 +22,11 @@ public class UserService {
 
         return userMapper.toResponse(savedUser);
     }
+
+    public UserResponse getUser(Long id) {
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return userMapper.toResponse(user);
+    }
 }

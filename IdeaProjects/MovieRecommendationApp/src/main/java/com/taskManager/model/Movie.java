@@ -15,5 +15,5 @@ import lombok.Setter;
 public class Movie {
     @Id
     private Long movieId;
-    private String name;
+    private String title;
 }

@@ -5,14 +5,13 @@ import com.taskManager.dto.UserDto.UserResponse;
 import com.taskManager.mapper.UserMapper;
 import com.taskManager.model.User;
 import com.taskManager.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
@@ -27,5 +26,9 @@ public class UserController {
     }
 
 
+    @GetMapping("/{id}")
+    public UserResponse getUser(@PathVariable Long id) {
+        return userService.getUser(id);
+    }
 
 }

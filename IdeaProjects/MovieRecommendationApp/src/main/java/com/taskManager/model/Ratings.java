@@ -16,4 +16,5 @@ public class Ratings {
     @Id
     private Long Id;
     private long movieId;
+    private long userId;
 }
