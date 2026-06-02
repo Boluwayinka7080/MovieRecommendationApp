@@ -1,15 +1,22 @@
 package com.taskManager.client;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.reactive.function.client.WebClient;
 
+import com.taskManager.model.MovieSearchResponseDto;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+
+import java.util.Collections;
+
+@Component
 public class TMBDSClient {
     private final WebClient webClient = WebClient.create();
 
-    @Value("${99065c82c437d940287b4ee6ca1e34ed}")
+    @Value("${tmdb.api.key}")
     private String apiKey;
 
-    public String searchMovies(String query){
+    public MovieSearchResponseDto searchMovies(String query){
 
         String url = "https://api.themoviedb.org/3/search/movie?api_key="
                 + apiKey
@@ -19,7 +26,9 @@ public class TMBDSClient {
         return webClient.get()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(MovieSearchResponseDto.class)
                 .block();
+
+
     }
 }
